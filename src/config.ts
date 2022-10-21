@@ -56,8 +56,8 @@ export const config = {
       // image: './path/to/image/source.png',
       description: `<div id="${COUNTRIES.TANZANIA.key}"></div>`,
       location: {
-        center: [35.03632, -6.14125],
-        zoom: 5.75,
+        center: [9.5795, 34.19061],
+        zoom: 6.36,
         pitch: 45.0,
         bearing: 0.0,
         // flyTo additional controls-

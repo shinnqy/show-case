@@ -12,7 +12,7 @@ export const indicators = [
 
 export const giiData = {
   [COUNTRIES.CHILE.key]: [66.5, 23.6, 25.1, 29.9, 37.7, 50.3, 34],
-  [COUNTRIES.TANZANIA.key]: [, , , , , ,],
+  [COUNTRIES.TANZANIA.key]: [48.4, 20.4, 25.3, 17.9, 23.9, 37.2, 37.4],
   [COUNTRIES.FINLAND.key]: [82.5, 39, 59.6, 61.6, 51.7, 65.9, 60.6],
   [COUNTRIES.AUSTRALIA.key]: [77.2, 37.8, 32.2, 48.6, 50.1, 58.8, 61.7],
   [COUNTRIES.INDIA.key]: [60.1, 24.3, 33.8, 30.9, 50.4, 40.7, 38.3],

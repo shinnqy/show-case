@@ -4,8 +4,8 @@ export const COUNTRIES = {
     key: 'Chile',
   },
   TANZANIA: {
-    label: '坦桑尼亚',
-    key: 'Tanzania',
+    label: '突尼斯',
+    key: 'Tunisia',
   },
   FINLAND: {
     label: '芬兰',
