@@ -1,53 +1,52 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
 import './index.css';
 import './config';
 import { detectDOM } from './untils/detect-dom';
-import { Chile } from './entries/Chile';
+import { RadarChart } from './entries/RadarChart';
 import { COUNTRIES } from './constants';
-import { Tanzania } from './entries/Tanzania';
-import { Finland } from './entries/finland';
-import { Australia } from './entries/Australia';
-import { India } from './entries/india';
-import { US } from './entries/US';
-import { China } from './entries/China';
+import { giiData } from './data/gii';
 
-const entries: Array<{ id: string; entryJSX: React.ReactNode }> = [
+const entries: Array<{ id: string; data: number[] }> = [
   {
     id: COUNTRIES.CHILE.key,
-    entryJSX: <Chile />,
+    data: giiData[COUNTRIES.CHILE.key],
   },
   {
     id: COUNTRIES.TANZANIA.key,
-    entryJSX: <Tanzania />,
+    data: giiData[COUNTRIES.TANZANIA.key],
   },
   {
     id: COUNTRIES.FINLAND.key,
-    entryJSX: <Finland />,
+    data: giiData[COUNTRIES.FINLAND.key],
   },
   {
     id: COUNTRIES.AUSTRALIA.key,
-    entryJSX: <Australia />,
+    data: giiData[COUNTRIES.AUSTRALIA.key],
   },
   {
     id: COUNTRIES.INDIA.key,
-    entryJSX: <India />,
+    data: giiData[COUNTRIES.INDIA.key],
   },
   {
     id: COUNTRIES.US.key,
-    entryJSX: <US />,
+    data: giiData[COUNTRIES.US.key],
   },
   {
     id: COUNTRIES.CN.key,
-    entryJSX: <China />,
+    data: giiData[COUNTRIES.CN.key],
   },
 ];
 
-entries.forEach(({ id, entryJSX }) => {
+entries.forEach(({ id, data }) => {
   detectDOM(`#${id}`).then(() => {
     ReactDOM.createRoot(document.getElementById(id)).render(
-      <React.StrictMode>{entryJSX}</React.StrictMode>
+      <React.StrictMode>
+        <RadarChart
+          id={id}
+          data={data}
+        />
+      </React.StrictMode>
     );
   });
 });

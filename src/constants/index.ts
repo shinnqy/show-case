@@ -1,23 +1,23 @@
 export const COUNTRIES = {
   CHILE: {
     label: '智利',
-    key: 'chile',
+    key: 'Chile',
   },
   TANZANIA: {
     label: '坦桑尼亚',
-    key: 'tanzania',
+    key: 'Tanzania',
   },
   FINLAND: {
     label: '芬兰',
-    key: 'finland',
+    key: 'Finland',
   },
   AUSTRALIA: {
     label: '澳大利亚',
-    key: 'australia',
+    key: 'Australia',
   },
   INDIA: {
     label: '印度',
-    key: 'india',
+    key: 'India',
   },
   US: {
     label: '美国',
@@ -25,6 +25,6 @@ export const COUNTRIES = {
   },
   CN: {
     label: '中国',
-    key: 'china',
+    key: 'China',
   },
 };
