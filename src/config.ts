@@ -1,12 +1,15 @@
 import { COUNTRIES } from './constants';
 
+const satelliteStyle = 'mapbox://styles/mapbox/satellite-streets-v11';
+const streetStyle = 'mapbox://styles/mapbox/streets-v11';
+
 export const config = {
-  style: 'mapbox://styles/mapbox/streets-v11',
+  style: streetStyle,
   accessToken:
     'pk.eyJ1Ijoic2hpbm5xeSIsImEiOiJjbDlldGR3ZWMwMGQwM3VzMmN4Mm0yZjFnIn0.xlIOvMBGrnPE6zc_9IUWvA',
-  showMarkers: true,
+  showMarkers: false,
   markerColor: '#3FB1CE',
-  //projection: 'equirectangular',
+  projection: 'globe',
   //Read more about available projections here
   //https://docs.mapbox.com/mapbox-gl-js/example/projections/
   inset: true,
@@ -27,7 +30,7 @@ export const config = {
       description: `<div id="${COUNTRIES.CHILE.key}"></div>`,
       location: {
         center: [-69.86224, -26.57585],
-        zoom: 5.02,
+        zoom: 4.5,
         pitch: 45.0,
         bearing: 0.0,
       },
@@ -57,7 +60,7 @@ export const config = {
       description: `<div id="${COUNTRIES.TANZANIA.key}"></div>`,
       location: {
         center: [9.5795, 34.19061],
-        zoom: 6.36,
+        zoom: 5.06,
         pitch: 45.0,
         bearing: 0.0,
         // flyTo additional controls-
@@ -82,7 +85,7 @@ export const config = {
       description: `<div id="${COUNTRIES.FINLAND.key}"></div>`,
       location: {
         center: [26.39834, 62.85022],
-        zoom: 5.4,
+        zoom: 4.5,
         pitch: 45.0,
         bearing: 0.0,
       },
@@ -101,7 +104,7 @@ export const config = {
       description: `<div id="${COUNTRIES.AUSTRALIA.key}"></div>`,
       location: {
         center: [134.67169, -25.4369],
-        zoom: 4.57,
+        zoom: 4.0,
         pitch: 45.0,
         bearing: 0.0,
         // flyTo additional controls-
@@ -126,7 +129,7 @@ export const config = {
       description: `<div id="${COUNTRIES.INDIA.key}"></div>`,
       location: {
         center: [78.69278, 22.35687],
-        zoom: 4.9,
+        zoom: 4.4,
         pitch: 45.0,
         bearing: 0.0,
       },
@@ -145,7 +148,7 @@ export const config = {
       description: `<div id="${COUNTRIES.US.key}"></div>`,
       location: {
         center: [-97.27997, 39.66817],
-        zoom: 4.41,
+        zoom: 4.0,
         pitch: 45.0,
         bearing: 0.0,
         // flyTo additional controls-
@@ -169,8 +172,8 @@ export const config = {
       // image: './path/to/image/source.png',
       description: `<div id="${COUNTRIES.CN.key}"></div>`,
       location: {
-        center: [116.35209, 40.00668],
-        zoom: 4.01,
+        center: [108.65885, 34.71375],
+        zoom: 3.8,
         pitch: 45.0,
         bearing: 0.0,
       },
