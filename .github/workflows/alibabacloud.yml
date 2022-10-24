@@ -1,0 +1,59 @@
+# This workflow will build and push a new container image to Alibaba Cloud Container Registry (ACR),
+# and then will deploy it to Alibaba Cloud Container Service for Kubernetes (ACK), when there is a push to the "master" branch.
+#
+# To use this workflow, you will need to complete the following set-up steps:
+#
+# 1. Create an ACR repository to store your container images. 
+#    You can use ACR EE instance for more security and better performance.
+#    For instructions see https://www.alibabacloud.com/help/doc-detail/142168.htm
+#
+# 2. Create an ACK cluster to run your containerized application.
+#    You can use ACK Pro cluster for more security and better performance.
+#    For instructions see https://www.alibabacloud.com/help/doc-detail/95108.htm
+#
+# 3. Store your AccessKey pair in GitHub Actions secrets named `ACCESS_KEY_ID` and `ACCESS_KEY_SECRET`.
+#    For instructions on setting up secrets see: https://developer.github.com/actions/managing-workflows/storing-secrets/
+#
+# 4. Change the values for the REGION_ID, REGISTRY, NAMESPACE, IMAGE, ACK_CLUSTER_ID, and ACK_DEPLOYMENT_NAME. 
+#
+
+name: Build and Deploy to ALIYUN ECS
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v3.5.1
+      with:
+        node-version: 16.17.0
+        
+    - name: Setup yarn
+      run: npm install -g yarn
+        
+    - name: Install deps
+      run: yarn
+      
+    - name: Build
+      run: yarn build
+
+    - name: Deploy to aliyun server        # 为 step 指定一个名称，将会在 github action 的控制台中显示
+      uses: easingthemes/ssh-deploy@v2.1.5      #可以访问的仓库，实现的上传服务器步骤被封装在此action
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.ALIYUN_ECS_PRVITE_KEY }}  #这个是阿里云的私钥
+        ARGS: "-rltgoDzvO --delete"
+        SOURCE: "dist"
+        REMOTE_HOST: ${{ secrets.ALIYUN_ECS_HOST }}    #阿里云的 ip
+        REMOTE_USER: ${{ secrets.ALIYUN_ECS_USER }}    #阿里云用户
+        TARGET: "~/drop/show-case-map"       #被部署的服务器路径 
+
