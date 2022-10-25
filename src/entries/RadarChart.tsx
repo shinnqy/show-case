@@ -53,11 +53,14 @@ export const RadarChart = React.memo(function RadarChart(props: IOwnProps) {
   }, []);
 
   return (
-    <div>
-      <div
-        id={chartId}
-        style={{ height: 400, width: 550 }}
-      ></div>
-    </div>
+    <div
+      id={chartId}
+      style={{
+        height: '32vw',
+        width: '30vw',
+        maxHeight: 400,
+        maxWidth: 550,
+      }}
+    ></div>
   );
 });
