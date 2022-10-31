@@ -1,70 +1,154 @@
-/* :root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
 body {
   margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+a,
+a:hover,
+a:visited {
+  color: #0071bc;
+}
+
+#map {
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+}
+
+#mapInset {
+  bottom: 50px;
+  right: 30px;
+  height: 180px;
+  width: 250px;
+  max-width: 100%;
+  position: fixed;
+  z-index: 1;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+  pointer-events: none;
+}
+
+#mapInset .mapboxgl-ctrl-bottom-left {
+  display: none;
+}
+
+@media (max-width: 500px) {
+  #mapInset {
+    display: none;
+  }
+}
+
+#header {
+  margin: auto;
+  width: 100%;
+  position: relative;
+  z-index: 5;
+}
+
+#header h1,
+#header h2,
+#header p {
+  margin: 0;
+  padding: 2vh 2vw;
+  text-align: center;
+}
+
+#footer {
+  width: 100%;
+  min-height: 5vh;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  text-align: center;
+  line-height: 25px;
+  font-size: 13px;
+  position: relative;
+  z-index: 5;
+}
+
+#features {
+  padding-top: 10vh;
+  padding-bottom: 10vh;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.centered {
+  width: 50vw;
+  margin: 0 auto;
+}
+
+.lefty {
+  /* width: 33vw; */
+  margin-left: 5vw;
+  justify-content: start;
+}
+
+.righty {
+  /* width: 33vw; */
+  /* margin-left: 62vw; */
+  margin-right: 5vw;
+  justify-content: end;
+}
+
+.fully {
+  width: 100%;
+  margin: auto;
+}
+
+.light {
+  color: #444;
+  background-color: #fafafa;
+}
+
+.dark {
+  color: #fafafa;
+  background-color: #444;
+}
+
+.step {
+  padding-bottom: 50vh;
+  /* margin-bottom: 10vh; */
+  opacity: 0.25;
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.step.active {
+  opacity: 0.9;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+.step > div {
+  padding: 25px 50px;
+  line-height: 25px;
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+.echarts-container > div {
+  cursor: pointer !important;
+}
+
+.step img {
+  width: 100%;
+}
+
+@media (max-width: 750px) {
+
+  .centered,
+  .lefty,
+  .righty,
+  .fully {
+    width: 90vw;
+    margin: 0 auto;
   }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-} */
+}
+
+/* Fix issue on mobile browser where scroll breaks  */
+.mapboxgl-canvas-container.mapboxgl-touch-zoom-rotate.mapboxgl-touch-drag-pan,
+.mapboxgl-canvas-container.mapboxgl-touch-zoom-rotate.mapboxgl-touch-drag-pan .mapboxgl-canvas {
+  touch-action: unset;
+}

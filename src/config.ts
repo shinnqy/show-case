@@ -22,7 +22,7 @@ export const config = {
     'Source: source citations, etc. <br> Created using <a href="https://github.com/mapbox/storytelling" target="_blank">Mapbox Storytelling</a> template.',
   chapters: [
     {
-      id: 'slug-style-id',
+      id: COUNTRIES.CHILE.key,
       alignment: 'left',
       hidden: false,
       title: COUNTRIES.CHILE.label,
@@ -52,7 +52,7 @@ export const config = {
       ],
     },
     {
-      id: 'second-identifier',
+      id: COUNTRIES.TANZANIA.key,
       alignment: 'right',
       hidden: false,
       title: COUNTRIES.TANZANIA.label,
@@ -77,7 +77,7 @@ export const config = {
       onChapterExit: [],
     },
     {
-      id: 'third-identifier',
+      id: COUNTRIES.FINLAND.key,
       alignment: 'left',
       hidden: false,
       title: COUNTRIES.FINLAND.label,
@@ -96,7 +96,7 @@ export const config = {
       onChapterExit: [],
     },
     {
-      id: 'fourth-identifier',
+      id: COUNTRIES.AUSTRALIA.key,
       alignment: 'right',
       hidden: false,
       title: COUNTRIES.AUSTRALIA.label,
@@ -121,7 +121,7 @@ export const config = {
       onChapterExit: [],
     },
     {
-      id: 'fifth-identifier',
+      id: COUNTRIES.INDIA.key,
       alignment: 'left',
       hidden: false,
       title: COUNTRIES.INDIA.label,
@@ -140,7 +140,7 @@ export const config = {
       onChapterExit: [],
     },
     {
-      id: 'sixth-identifier',
+      id: COUNTRIES.US.key,
       alignment: 'right',
       hidden: false,
       title: COUNTRIES.US.label,
@@ -165,7 +165,7 @@ export const config = {
       onChapterExit: [],
     },
     {
-      id: 'seventh-identifier',
+      id: COUNTRIES.CN.key,
       alignment: 'left',
       hidden: false,
       title: COUNTRIES.CN.label,

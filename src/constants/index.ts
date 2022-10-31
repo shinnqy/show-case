@@ -5,7 +5,7 @@ export const COUNTRIES = {
   },
   TANZANIA: {
     label: '突尼斯',
-    key: 'Tunisia',
+    key: 'TANZANIA',
   },
   FINLAND: {
     label: '芬兰',
@@ -25,6 +25,6 @@ export const COUNTRIES = {
   },
   CN: {
     label: '中国',
-    key: 'China',
+    key: 'CN',
   },
 };
