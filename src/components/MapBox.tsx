@@ -3,7 +3,7 @@ import { MapBoxStoryTelling } from './MapBox.util';
 
 export const MapBox = React.memo(function MapBox() {
   useEffect(() => {
-    MapBoxStoryTelling.init();
+    MapBoxStoryTelling.mapInstance();
   }, []);
 
   return (

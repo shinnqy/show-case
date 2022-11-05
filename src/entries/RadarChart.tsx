@@ -1,10 +1,20 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useCallback, useState } from 'react';
+// import { IconButton, mergeStyles, Modal } from '@fluentui/react';
 import * as echarts from 'echarts';
 import type { EChartsOption } from 'echarts';
 import { indicators } from '../data/gii';
+import {
+  COUNTRIES,
+  COUNTRY_KEY,
+  COUNTRY_ZOOM_IN,
+  ISO_COUNTRY_MAP,
+} from '../constants';
+// import { DetailContent } from './DetailContent';
+// import { ZoomModal } from '../components/ZoomModal';
+import { MapBoxStoryTelling } from '../components/MapBox.util';
 
 interface IOwnProps {
-  id: string;
+  id: COUNTRY_KEY;
   data: number[];
 }
 export const RadarChart = React.memo(function RadarChart(props: IOwnProps) {
@@ -46,21 +56,36 @@ export const RadarChart = React.memo(function RadarChart(props: IOwnProps) {
     return _o;
   }, [props.id, props.data]);
 
+  const [showDetail, setShowDetail] = useState<boolean>(false);
+
   useEffect(() => {
     const chartDom = document.getElementById(chartId);
     const chart = echarts.init(chartDom, 'dark');
     option && chart.setOption(option);
   }, []);
 
+  const handleDigIntoDetails = useCallback(() => {
+    setShowDetail(!showDetail);
+    MapBoxStoryTelling.instance().hightlightCountry(
+      ISO_COUNTRY_MAP[props.id],
+      COUNTRY_ZOOM_IN[props.id]
+    );
+  }, [showDetail, props.id]);
+
   return (
-    <div
-      id={chartId}
-      style={{
-        height: '32vw',
-        width: '30vw',
-        maxHeight: 400,
-        maxWidth: 550,
-      }}
-    ></div>
+    <>
+      <div
+        id={chartId}
+        className="echarts-container"
+        style={{
+          height: '32vw',
+          width: '30vw',
+          maxHeight: 400,
+          maxWidth: 550,
+          cursor: 'pointer',
+        }}
+        onClick={handleDigIntoDetails}
+      ></div>
+    </>
   );
 });

@@ -1,13 +1,15 @@
-import { COUNTRIES } from './constants';
+import { COUNTRIES, COUNTRY_KEY, COUNTRY_LOCATION } from './constants';
 
-const satelliteStyle = 'mapbox://styles/mapbox/satellite-streets-v11';
+export const satelliteStyle = 'mapbox://styles/mapbox/satellite-streets-v11';
 const streetStyle = 'mapbox://styles/mapbox/streets-v11';
+const lightStyle = 'mapbox://styles/mapbox/light-v10';
+const myStyle = 'mapbox://styles/shinnqy/cla3q2izl00nc14p07l884hxr';
 
 export const config = {
-  style: streetStyle,
+  style: myStyle,
   accessToken:
     'pk.eyJ1Ijoic2hpbm5xeSIsImEiOiJjbDlldGR3ZWMwMGQwM3VzMmN4Mm0yZjFnIn0.xlIOvMBGrnPE6zc_9IUWvA',
-  showMarkers: false,
+  showMarkers: true,
   markerColor: '#3FB1CE',
   projection: 'globe',
   //Read more about available projections here
@@ -22,18 +24,13 @@ export const config = {
     'Source: source citations, etc. <br> Created using <a href="https://github.com/mapbox/storytelling" target="_blank">Mapbox Storytelling</a> template.',
   chapters: [
     {
-      id: COUNTRIES.CHILE.key,
+      id: COUNTRY_KEY.Chile,
       alignment: 'left',
       hidden: false,
-      title: COUNTRIES.CHILE.label,
+      title: COUNTRIES[COUNTRY_KEY.Chile].label,
       // image: './path/to/image/source.png',
-      description: `<div id="${COUNTRIES.CHILE.key}"></div>`,
-      location: {
-        center: [-69.86224, -26.57585],
-        zoom: 4.5,
-        pitch: 45.0,
-        bearing: 0.0,
-      },
+      description: `<div id="${COUNTRY_KEY.Chile}"></div>`,
+      location: COUNTRY_LOCATION[COUNTRY_KEY.Chile],
       mapAnimation: 'flyTo',
       rotateAnimation: false,
       callback: '',
@@ -58,18 +55,7 @@ export const config = {
       title: COUNTRIES.TANZANIA.label,
       // image: './path/to/image/source.png',
       description: `<div id="${COUNTRIES.TANZANIA.key}"></div>`,
-      location: {
-        center: [9.5795, 34.19061],
-        zoom: 5.06,
-        pitch: 45.0,
-        bearing: 0.0,
-        // flyTo additional controls-
-        // These options control the flight curve, making it move
-        // slowly and zoom out almost completely before starting
-        // to pan.
-        //speed: 2, // make the flying slow
-        //curve: 1, // change the speed at which it zooms out
-      },
+      location: COUNTRY_LOCATION[COUNTRY_KEY.TANZANIA],
       mapAnimation: 'flyTo',
       rotateAnimation: false,
       callback: '',
@@ -77,18 +63,13 @@ export const config = {
       onChapterExit: [],
     },
     {
-      id: COUNTRIES.FINLAND.key,
+      id: COUNTRY_KEY.Finland,
       alignment: 'left',
       hidden: false,
-      title: COUNTRIES.FINLAND.label,
+      title: COUNTRIES[COUNTRY_KEY.Finland].label,
       // image: './path/to/image/source.png',
-      description: `<div id="${COUNTRIES.FINLAND.key}"></div>`,
-      location: {
-        center: [26.39834, 62.85022],
-        zoom: 4.5,
-        pitch: 45.0,
-        bearing: 0.0,
-      },
+      description: `<div id="${COUNTRY_KEY.Finland}"></div>`,
+      location: COUNTRY_LOCATION[COUNTRY_KEY.Finland],
       mapAnimation: 'flyTo',
       rotateAnimation: false,
       callback: '',
@@ -96,24 +77,13 @@ export const config = {
       onChapterExit: [],
     },
     {
-      id: COUNTRIES.AUSTRALIA.key,
+      id: COUNTRY_KEY.Australia,
       alignment: 'right',
       hidden: false,
-      title: COUNTRIES.AUSTRALIA.label,
+      title: COUNTRIES[COUNTRY_KEY.Australia].label,
       // image: './path/to/image/source.png',
-      description: `<div id="${COUNTRIES.AUSTRALIA.key}"></div>`,
-      location: {
-        center: [134.67169, -25.4369],
-        zoom: 4.0,
-        pitch: 45.0,
-        bearing: 0.0,
-        // flyTo additional controls-
-        // These options control the flight curve, making it move
-        // slowly and zoom out almost completely before starting
-        // to pan.
-        //speed: 2, // make the flying slow
-        //curve: 1, // change the speed at which it zooms out
-      },
+      description: `<div id="${COUNTRY_KEY.Australia}"></div>`,
+      location: COUNTRY_LOCATION[COUNTRY_KEY.Australia],
       mapAnimation: 'flyTo',
       rotateAnimation: false,
       callback: '',
@@ -121,18 +91,13 @@ export const config = {
       onChapterExit: [],
     },
     {
-      id: COUNTRIES.INDIA.key,
+      id: COUNTRY_KEY.India,
       alignment: 'left',
       hidden: false,
-      title: COUNTRIES.INDIA.label,
+      title: COUNTRIES[COUNTRY_KEY.India].label,
       // image: './path/to/image/source.png',
-      description: `<div id="${COUNTRIES.INDIA.key}"></div>`,
-      location: {
-        center: [78.69278, 22.35687],
-        zoom: 4.4,
-        pitch: 45.0,
-        bearing: 0.0,
-      },
+      description: `<div id="${COUNTRY_KEY.India}"></div>`,
+      location: COUNTRY_LOCATION[COUNTRY_KEY.India],
       mapAnimation: 'flyTo',
       rotateAnimation: false,
       callback: '',
@@ -140,24 +105,13 @@ export const config = {
       onChapterExit: [],
     },
     {
-      id: COUNTRIES.US.key,
+      id: COUNTRY_KEY.US,
       alignment: 'right',
       hidden: false,
-      title: COUNTRIES.US.label,
+      title: COUNTRIES[COUNTRY_KEY.US].label,
       // image: './path/to/image/source.png',
-      description: `<div id="${COUNTRIES.US.key}"></div>`,
-      location: {
-        center: [-97.27997, 39.66817],
-        zoom: 4.0,
-        pitch: 45.0,
-        bearing: 0.0,
-        // flyTo additional controls-
-        // These options control the flight curve, making it move
-        // slowly and zoom out almost completely before starting
-        // to pan.
-        //speed: 2, // make the flying slow
-        //curve: 1, // change the speed at which it zooms out
-      },
+      description: `<div id="${COUNTRY_KEY.US}"></div>`,
+      location: COUNTRY_LOCATION[COUNTRY_KEY.US],
       mapAnimation: 'flyTo',
       rotateAnimation: false,
       callback: '',
@@ -165,18 +119,13 @@ export const config = {
       onChapterExit: [],
     },
     {
-      id: COUNTRIES.CN.key,
+      id: COUNTRY_KEY.CN,
       alignment: 'left',
       hidden: false,
-      title: COUNTRIES.CN.label,
+      title: COUNTRIES[COUNTRY_KEY.CN].label,
       // image: './path/to/image/source.png',
-      description: `<div id="${COUNTRIES.CN.key}"></div>`,
-      location: {
-        center: [108.65885, 34.71375],
-        zoom: 3.8,
-        pitch: 45.0,
-        bearing: 0.0,
-      },
+      description: `<div id="${COUNTRY_KEY.CN}"></div>`,
+      location: COUNTRY_LOCATION[COUNTRY_KEY.CN],
       mapAnimation: 'flyTo',
       rotateAnimation: false,
       callback: '',

@@ -1,5 +1,6 @@
 import { LngLatLike } from 'mapbox-gl';
 import { config } from '../config';
+import { IZoomToOption } from '../constants';
 
 const layerTypes = {
   fill: ['fill-opacity'],
@@ -22,18 +23,47 @@ const transformRequest = (url: string) => {
 };
 
 export class MapBoxStoryTelling {
-  private static map: mapboxgl.Map;
-  private static insetMap: mapboxgl.Map;
-  private static marker: mapboxgl.Marker;
-  private static scroller: any;
-  private static initLoad: boolean = true;
+  private static _instance: MapBoxStoryTelling;
+  private map: mapboxgl.Map;
+  private insetMap: mapboxgl.Map;
+  private marker: mapboxgl.Marker;
+  private scroller: any;
+  private initLoad: boolean = true;
+  private static cbLayer: string = 'country-boundaries';
+  private static wbLayer: string = 'water-boundaries';
 
-  public static init() {
+  public static instance(): MapBoxStoryTelling {
+    if (!MapBoxStoryTelling._instance) {
+      MapBoxStoryTelling._instance = new MapBoxStoryTelling();
+    }
+    return MapBoxStoryTelling._instance;
+  }
+
+  public static mapInstance(): mapboxgl.Map {
+    return MapBoxStoryTelling.instance().map;
+  }
+
+  constructor() {
+    this.init();
+  }
+
+  public hightlightCountry(countryId: string, zoomToOption: IZoomToOption) {
+    console.log({ countryId, zoomToOption });
+    // this.setPitch(45, 0);
+    this.doHighlightLayer(countryId);
+    this.map.setPitch(0);
+    this.map.zoomTo(zoomToOption.zoomTo, {
+      duration: 1000,
+      offset: zoomToOption.offset,
+    });
+  }
+
+  private init() {
     // @ts-ignore
     mapboxgl.accessToken = config.accessToken;
 
     // @ts-ignore
-    const map = (MapBoxStoryTelling.map = new mapboxgl.Map({
+    const map = (this.map = new mapboxgl.Map({
       container: 'map',
       style: config.style,
       center: config.chapters[0].location.center as LngLatLike,
@@ -42,13 +72,13 @@ export class MapBoxStoryTelling {
       pitch: config.chapters[0].location.pitch,
       interactive: false,
       transformRequest: transformRequest,
-      projection: config.projection,
+      projection: config.projection as any, // TODO:
     }));
 
     // Create a inset map if enabled in config.js
     if (config.inset) {
       // @ts-ignore
-      MapBoxStoryTelling.insetMap = new mapboxgl.Map({
+      this.insetMap = new mapboxgl.Map({
         container: 'mapInset', // container id
         style: 'mapbox://styles/mapbox/dark-v10', //hosted style id
         center: config.chapters[0].location.center as LngLatLike,
@@ -65,7 +95,7 @@ export class MapBoxStoryTelling {
 
     if (config.showMarkers) {
       // @ts-ignore
-      const marker = (MapBoxStoryTelling.marker = new mapboxgl.Marker({
+      const marker = (this.marker = new mapboxgl.Marker({
         color: config.markerColor,
       }));
       marker
@@ -73,13 +103,17 @@ export class MapBoxStoryTelling {
         .addTo(map);
     }
 
-    const scroller = (MapBoxStoryTelling.scroller = scrollama());
+    // @ts-ignore TOOD:
+    const scroller = (this.scroller = scrollama());
 
     map.on('style.load', () => {
       map.setFog({ 'horizon-blend': 0.1 });
     });
 
-    map.on('load', function () {
+    map.on('load', () => {
+      this.addHighlightLayer(map);
+      this.resetHighlightLayerStatus();
+
       if (config.use3dTerrain) {
         map.addSource('mapbox-dem', {
           type: 'raster-dem',
@@ -103,29 +137,163 @@ export class MapBoxStoryTelling {
       }
 
       if (config.inset) {
-        map.on('move', MapBoxStoryTelling.getInsetBounds);
+        map.on('move', this.getInsetBounds.bind(this));
       }
 
-      MapBoxStoryTelling.initScroller();
+      this.initScroller();
     });
 
     // setup resize event
     window.addEventListener('resize', scroller.resize);
+
+    // for test;
+    (window as any).test = function (callback) {
+      callback(map);
+    };
   }
 
-  private static initScroller() {
-    // instantiate the scrollama
-    const map = MapBoxStoryTelling.map;
-    const insetMap = MapBoxStoryTelling.insetMap;
+  private addHighlightLayer(map: mapboxgl.Map) {
+    map.addLayer(
+      {
+        id: MapBoxStoryTelling.cbLayer,
+        source: {
+          type: 'vector',
+          url: 'mapbox://mapbox.country-boundaries-v1',
+        },
+        'source-layer': 'country_boundaries',
+        type: 'fill',
+        paint: {
+          'fill-color': '#000000',
+          'fill-opacity': 0.5,
+        },
+      }
+      // 'other-countries'
+    );
+    map.addLayer(
+      {
+        id: MapBoxStoryTelling.wbLayer,
+        source: {
+          type: 'vector',
+          url: 'mapbox://mapbox.mapbox-streets-v8',
+        },
+        'source-layer': 'water',
+        type: 'fill',
+        paint: {
+          'fill-color': '#000000',
+          'fill-opacity': 0.5,
+        },
+      }
+      // 'other-countries'
+    );
 
-    MapBoxStoryTelling.scroller
+    // map.addLayer(
+    //   {
+    //     id: 'other-countries',
+    //     source: {
+    //       type: 'vector',
+    //       url: 'mapbox://mapbox.mapbox-streets-v8',
+    //       // url: 'mapbox://mapbox.satellite',
+    //     },
+    //     'source-layer': 'water',
+    //     type: 'fill',
+    //     paint: {
+    //       'fill-opacity': 0.3,
+    //     },
+    //   }
+    //   // 'country-boundaries'
+    // );
+
+    // map.addLayer(
+    //   {
+    //     id: 'o-water',
+    //     source: {
+    //       type: 'vector',
+    //       url: 'mapbox://mapbox.mapbox-streets-v8',
+    //     },
+    //     'source-layer': 'water',
+    //     type: 'fill',
+    //     paint: {
+    //       'fill-color': '#ffffff',
+    //     },
+    //   },
+    //   'other-countries'
+    // );
+    // map.addLayer(
+    //   {
+    //     id: 'country-boundaries-line',
+    //     source: {
+    //       type: 'vector',
+    //       url: 'mapbox://mapbox.country-boundaries-v1',
+    //     },
+    //     'source-layer': 'country_boundaries',
+    //     type: 'line',
+    //     paint: {
+    //       'line-width': 3,
+    //       'line-color': '#cccccc',
+    //     },
+    //   },
+    //   'water'
+    // );
+  }
+
+  private setPitch(start: number, end: number, step: number = 3) {
+    let degree = start;
+    let reqId = null;
+    const aniPitch = () => {
+      if (degree > 0) {
+        this.map.setPitch(degree);
+        degree -= step;
+        if (degree < end) degree = end;
+        reqId = requestAnimationFrame(aniPitch);
+      } else if (degree === 0) {
+        this.map.setPitch(degree);
+        cancelAnimationFrame(reqId);
+      }
+    };
+    reqId = requestAnimationFrame(aniPitch);
+  }
+
+  private resetHighlightLayerStatus() {
+    this.map.setFilter(MapBoxStoryTelling.cbLayer, ['in', 'iso_3166_1']);
+    this.map.setFilter(MapBoxStoryTelling.wbLayer, ['in', '']);
+  }
+
+  private doHighlightLayer(ISOCountryCode: string) {
+    this.map.setFilter(MapBoxStoryTelling.cbLayer, [
+      '!',
+      ['in', ['get', 'iso_3166_1'], ['literal', ISOCountryCode]],
+    ]);
+    this.map.setFilter(MapBoxStoryTelling.wbLayer, [
+      '!',
+      ['in', 'iso_3166_1', ''],
+    ]);
+  }
+
+  private removeLayer() {
+    const map = this.map;
+
+    if (map.getLayer(MapBoxStoryTelling.cbLayer)) {
+      map.removeLayer(MapBoxStoryTelling.cbLayer);
+      map.removeSource(MapBoxStoryTelling.cbLayer);
+
+      map.removeLayer(MapBoxStoryTelling.wbLayer);
+      map.removeSource(MapBoxStoryTelling.wbLayer);
+    }
+  }
+
+  private initScroller() {
+    // instantiate the scrollama
+    const map = this.map;
+    const insetMap = this.insetMap;
+
+    this.scroller
       .setup({
         step: '.step',
         offset: 0.5,
         progress: true,
       })
       .onStepEnter(async (response) => {
-        var chapter = config.chapters.find(
+        const chapter = config.chapters.find(
           (chap) => chap.id === response.element.id
         );
         response.element.classList.add('active');
@@ -147,12 +315,10 @@ export class MapBoxStoryTelling {
           }
         }
         if (config.showMarkers) {
-          MapBoxStoryTelling.marker.setLngLat(
-            chapter.location.center as LngLatLike
-          );
+          this.marker.setLngLat(chapter.location.center as LngLatLike);
         }
         if (chapter.onChapterEnter.length > 0) {
-          chapter.onChapterEnter.forEach(MapBoxStoryTelling.setLayerOpacity);
+          chapter.onChapterEnter.forEach(this.setLayerOpacity);
         }
         if (chapter.callback) {
           window[chapter.callback]();
@@ -175,13 +341,15 @@ export class MapBoxStoryTelling {
         );
         response.element.classList.remove('active');
         if (chapter.onChapterExit.length > 0) {
-          chapter.onChapterExit.forEach(MapBoxStoryTelling.setLayerOpacity);
+          chapter.onChapterExit.forEach(this.setLayerOpacity);
         }
+        // this.removeLayer();
+        this.resetHighlightLayerStatus();
       });
   }
 
-  private static getInsetBounds() {
-    let bounds = MapBoxStoryTelling.map.getBounds();
+  private getInsetBounds() {
+    let bounds = this.map.getBounds();
 
     let boundsJson = {
       type: 'FeatureCollection',
@@ -193,10 +361,15 @@ export class MapBoxStoryTelling {
             type: 'Polygon',
             coordinates: [
               [
+                // @ts-ignore // TODO:
                 [bounds._sw.lng, bounds._sw.lat],
+                // @ts-ignore // TODO:
                 [bounds._ne.lng, bounds._sw.lat],
+                // @ts-ignore // TODO:
                 [bounds._ne.lng, bounds._ne.lat],
+                // @ts-ignore // TODO:
                 [bounds._sw.lng, bounds._ne.lat],
+                // @ts-ignore // TODO:
                 [bounds._sw.lng, bounds._sw.lat],
               ],
             ],
@@ -205,16 +378,16 @@ export class MapBoxStoryTelling {
       ],
     };
 
-    if (MapBoxStoryTelling.initLoad) {
-      MapBoxStoryTelling.addInsetLayer(boundsJson);
-      MapBoxStoryTelling.initLoad = false;
+    if (this.initLoad) {
+      this.addInsetLayer(boundsJson);
+      this.initLoad = false;
     } else {
-      MapBoxStoryTelling.updateInsetLayer(boundsJson);
+      this.updateInsetLayer(boundsJson);
     }
   }
 
-  private static addInsetLayer(bounds: any) {
-    const insetMap = MapBoxStoryTelling.insetMap;
+  private addInsetLayer(bounds: any) {
+    const insetMap = this.insetMap;
 
     insetMap.addSource('boundsSource', {
       type: 'geojson',
@@ -244,14 +417,15 @@ export class MapBoxStoryTelling {
     });
   }
 
-  private static updateInsetLayer(bounds) {
-    MapBoxStoryTelling.insetMap.getSource('boundsSource').setData(bounds);
+  private updateInsetLayer(bounds) {
+    // @ts-ignore // TODO:
+    this.insetMap.getSource('boundsSource').setData(bounds);
   }
 
-  private static setLayerOpacity(layer: any) {
-    const map = MapBoxStoryTelling.map;
+  private setLayerOpacity(layer: any) {
+    const map = this.map;
 
-    const paintProps = MapBoxStoryTelling.getLayerPaintType(layer.layer);
+    const paintProps = this.getLayerPaintType(layer.layer);
     paintProps.forEach(function (prop) {
       let options = {};
       if (layer.duration) {
@@ -263,8 +437,8 @@ export class MapBoxStoryTelling {
     });
   }
 
-  private static getLayerPaintType(layer: any) {
-    const map = MapBoxStoryTelling.map;
+  private getLayerPaintType(layer: any) {
+    const map = this.map;
 
     const layerType = map.getLayer(layer).type;
     return layerTypes[layerType];
