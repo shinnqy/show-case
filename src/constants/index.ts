@@ -40,14 +40,14 @@ export const COUNTRIES = {
 };
 
 // https://studio.mapbox.com/tilesets/mapbox.country-boundaries-v1/#3.19/-31.28/-66.01
-export const ISO_COUNTRY_MAP = {
-  [COUNTRY_KEY.Chile]: 'CL',
-  [COUNTRY_KEY.TANZANIA]: 'TN',
-  [COUNTRY_KEY.Finland]: 'FI',
-  [COUNTRY_KEY.Australia]: 'AU',
-  [COUNTRY_KEY.India]: 'IN',
-  [COUNTRY_KEY.US]: 'US',
-  [COUNTRY_KEY.CN]: 'CN',
+export const ISO_COUNTRY_MAP: Record<COUNTRY_KEY, Array<string>> = {
+  [COUNTRY_KEY.Chile]: ['CL'],
+  [COUNTRY_KEY.TANZANIA]: ['TN'],
+  [COUNTRY_KEY.Finland]: ['FI'],
+  [COUNTRY_KEY.Australia]: ['AU'],
+  [COUNTRY_KEY.India]: ['IN'],
+  [COUNTRY_KEY.US]: ['US'],
+  [COUNTRY_KEY.CN]: ['CN', 'TW', 'D0CNTWVN1', 'D0CNPHTWVN1'],
 };
 
 export const COUNTRY_LOCATION: Record<

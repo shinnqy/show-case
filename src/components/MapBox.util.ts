@@ -164,7 +164,7 @@ export class MapBoxStoryTelling {
         type: 'fill',
         paint: {
           'fill-color': '#000000',
-          'fill-opacity': 0.5,
+          'fill-opacity': 0.8,
         },
       }
       // 'other-countries'
@@ -180,7 +180,7 @@ export class MapBoxStoryTelling {
         type: 'fill',
         paint: {
           'fill-color': '#000000',
-          'fill-opacity': 0.5,
+          'fill-opacity': 0.8,
         },
       }
       // 'other-countries'
