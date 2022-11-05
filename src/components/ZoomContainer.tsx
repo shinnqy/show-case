@@ -11,7 +11,7 @@ export const ZoomContainer = React.memo(function ZoomContainer(props) {
             <button onClick={() => zoomOut()}>-</button>
             <button onClick={() => resetTransform()}>x</button>
           </div> */}
-          <TransformComponent>{props.children};</TransformComponent>
+          {/* <TransformComponent>{props.children};</TransformComponent> */}
         </React.Fragment>
       )}
     </TransformWrapper>
