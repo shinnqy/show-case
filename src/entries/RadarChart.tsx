@@ -60,6 +60,7 @@ export const RadarChart = React.memo(function RadarChart(props: IOwnProps) {
 
   useEffect(() => {
     const chartDom = document.getElementById(chartId);
+    if (!chartDom) return;
     const chart = echarts.init(chartDom, 'dark');
     option && chart.setOption(option);
   }, []);
@@ -73,19 +74,44 @@ export const RadarChart = React.memo(function RadarChart(props: IOwnProps) {
   }, [showDetail, props.id]);
 
   return (
-    <>
+    <div
+      style={{
+        position: 'relative',
+        height: '32vw',
+        width: '30vw',
+        maxHeight: 400,
+        maxWidth: 550,
+      }}
+      onClick={handleDigIntoDetails}
+    >
       <div
         id={chartId}
         className="echarts-container"
         style={{
+          opacity: showDetail ? 0 : 1,
+          transition: 'opacity 1s',
+          position: 'absolute',
           height: '32vw',
           width: '30vw',
           maxHeight: 400,
           maxWidth: 550,
           cursor: 'pointer',
         }}
-        onClick={handleDigIntoDetails}
       ></div>
-    </>
+      <div
+        style={{
+          opacity: showDetail ? 1 : 0,
+          transition: 'opacity 1s',
+          position: 'absolute',
+          height: '32vw',
+          width: '30vw',
+          maxHeight: 400,
+          maxWidth: 550,
+          cursor: 'pointer',
+        }}
+      >
+        detail charts
+      </div>
+    </div>
   );
 });
