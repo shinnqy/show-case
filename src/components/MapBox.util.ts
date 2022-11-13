@@ -47,7 +47,7 @@ export class MapBoxStoryTelling {
     this.init();
   }
 
-  public hightlightCountry(countryId: string, zoomToOption: IZoomToOption) {
+  public hightlightCountry(countryId: string[], zoomToOption: IZoomToOption) {
     console.log({ countryId, zoomToOption });
     // this.setPitch(45, 0);
     this.doHighlightLayer(countryId);
@@ -258,7 +258,7 @@ export class MapBoxStoryTelling {
     this.map.setFilter(MapBoxStoryTelling.wbLayer, ['in', '']);
   }
 
-  private doHighlightLayer(ISOCountryCode: string) {
+  private doHighlightLayer(ISOCountryCode: string[]) {
     this.map.setFilter(MapBoxStoryTelling.cbLayer, [
       '!',
       ['in', ['get', 'iso_3166_1'], ['literal', ISOCountryCode]],

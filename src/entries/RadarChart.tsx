@@ -12,6 +12,7 @@ import {
 // import { DetailContent } from './DetailContent';
 // import { ZoomModal } from '../components/ZoomModal';
 import { MapBoxStoryTelling } from '../components/MapBox.util';
+import { RankingChart } from './RankingChart';
 
 interface IOwnProps {
   id: COUNTRY_KEY;
@@ -110,7 +111,7 @@ export const RadarChart = React.memo(function RadarChart(props: IOwnProps) {
           cursor: 'pointer',
         }}
       >
-        detail charts
+        {showDetail && <RankingChart id={props.id} />}
       </div>
     </div>
   );
