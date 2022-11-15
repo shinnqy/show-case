@@ -6,7 +6,7 @@ const lightStyle = 'mapbox://styles/mapbox/light-v10';
 const myStyle = 'mapbox://styles/shinnqy/cla3q2izl00nc14p07l884hxr';
 
 export const config = {
-  style: myStyle,
+  style: lightStyle,
   accessToken:
     'pk.eyJ1Ijoic2hpbm5xeSIsImEiOiJjbDlldGR3ZWMwMGQwM3VzMmN4Mm0yZjFnIn0.xlIOvMBGrnPE6zc_9IUWvA',
   showMarkers: true,

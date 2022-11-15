@@ -14,7 +14,7 @@ export const COUNTRIES = {
     key: COUNTRY_KEY.Chile,
   },
   [COUNTRY_KEY.TANZANIA]: {
-    label: '突尼斯',
+    label: '阿尔及利亚',
     key: COUNTRY_KEY.TANZANIA,
   },
   [COUNTRY_KEY.Finland]: {
@@ -42,7 +42,7 @@ export const COUNTRIES = {
 // https://studio.mapbox.com/tilesets/mapbox.country-boundaries-v1/#3.19/-31.28/-66.01
 export const ISO_COUNTRY_MAP: Record<COUNTRY_KEY, Array<string>> = {
   [COUNTRY_KEY.Chile]: ['CL'],
-  [COUNTRY_KEY.TANZANIA]: ['TN'],
+  [COUNTRY_KEY.TANZANIA]: ['DZ'],
   [COUNTRY_KEY.Finland]: ['FI'],
   [COUNTRY_KEY.Australia]: ['AU'],
   [COUNTRY_KEY.India]: ['IN'],
@@ -66,8 +66,8 @@ export const COUNTRY_LOCATION: Record<
     bearing: 0.0,
   },
   [COUNTRY_KEY.TANZANIA]: {
-    center: [9.5795, 34.19061],
-    zoom: 5.06,
+    center: [2.91362, 28.41503],
+    zoom: 4.59,
     pitch: 45.0,
     bearing: 0.0,
     // flyTo additional controls-
@@ -131,8 +131,8 @@ export const COUNTRY_ZOOM_IN: Record<COUNTRY_KEY, IZoomToOption> = {
     offset: [-700, 300],
   },
   [COUNTRY_KEY.TANZANIA]: {
-    zoomTo: 6,
-    offset: [400, 0],
+    zoomTo: 5,
+    offset: [1000, 0],
   },
   [COUNTRY_KEY.Finland]: {
     zoomTo: 4.8,
