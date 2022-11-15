@@ -1,8 +1,10 @@
 import React, { useRef } from 'react';
+import { ThemeProvider } from '@fluentui/react';
 import cx from 'classnames';
 import { config } from './config';
 import { MapBox } from './components/MapBox';
 import { ChapterContainer } from './entries/ChapterContainer';
+import { darkTheme } from './theme';
 
 const alignments = {
   left: 'lefty',
@@ -21,7 +23,7 @@ export const App = React.memo(function App() {
           className={config.theme}
         >
           <h1>{config.title}</h1>
-          <h2>{config.subtitle}</h2>
+          {config.subtitle && <h2>{config.subtitle}</h2>}
           <p>{config.byline}</p>
         </div>
         <div id="features">
@@ -44,19 +46,23 @@ export const App = React.memo(function App() {
                   <h3>{c.title}</h3>
                   {/* <img src={c?.immage} alt="" /> */}
                   <div>
-                    <ChapterContainer id={c.id} />
+                    <ThemeProvider theme={darkTheme}>
+                      <ChapterContainer id={c.id} />
+                    </ThemeProvider>
                   </div>
                 </div>
               </div>
             );
           })}
         </div>
-        <div
-          id="footer"
-          className={config.theme}
-        >
-          <p>{config.footer}</p>
-        </div>
+        {config.footer && (
+          <div
+            id="footer"
+            className={config.theme}
+          >
+            <p>{config.footer}</p>
+          </div>
+        )}
       </div>
     </>
   );
