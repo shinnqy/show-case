@@ -1,9 +1,8 @@
 import React, { useRef } from 'react';
 import cx from 'classnames';
 import { config } from './config';
-import { RadarChart } from './entries/RadarChart';
-import { giiData } from './data/gii';
 import { MapBox } from './components/MapBox';
+import { ChapterContainer } from './entries/ChapterContainer';
 
 const alignments = {
   left: 'lefty',
@@ -45,10 +44,7 @@ export const App = React.memo(function App() {
                   <h3>{c.title}</h3>
                   {/* <img src={c?.immage} alt="" /> */}
                   <div>
-                    <RadarChart
-                      id={c.id}
-                      data={giiData[c.id]}
-                    />
+                    <ChapterContainer id={c.id} />
                   </div>
                 </div>
               </div>
