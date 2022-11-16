@@ -5,7 +5,7 @@ const streetStyle = 'mapbox://styles/mapbox/streets-v11';
 const lightStyle = 'mapbox://styles/mapbox/light-v10';
 const myStyle = 'mapbox://styles/shinnqy/cla3q2izl00nc14p07l884hxr';
 
-export const config = {
+export const config: IConfig = {
   style: lightStyle,
   accessToken:
     'pk.eyJ1Ijoic2hpbm5xeSIsImEiOiJjbDlldGR3ZWMwMGQwM3VzMmN4Mm0yZjFnIn0.xlIOvMBGrnPE6zc_9IUWvA',
@@ -154,5 +154,49 @@ export const config = {
     // },
   ],
 };
+
+export const alignments = {
+  left: 'lefty',
+  center: 'centered',
+  right: 'righty',
+  full: 'fully',
+};
+
+export interface IConfig {
+  style: string;
+  accessToken: string;
+  showMarkers: boolean;
+  markerColor: string;
+  projection: string;
+  inset: boolean;
+  theme: 'dark';
+  use3dTerrain: boolean;
+  title: string;
+  subtitle?: string;
+  byline?: string;
+  footer?: string;
+  chapters: IChapter[];
+}
+
+export interface IChapter {
+  id: COUNTRY_KEY;
+  alignment: 'left' | 'right';
+  hidden: boolean;
+  title: string;
+  description: string;
+  location: ILocation;
+  mapAnimation: 'flyTo';
+  rotateAnimation: boolean;
+  callback: string;
+  onChapterEnter?: any[];
+  onChapterExit?: any[];
+}
+
+interface ILocation {
+  center: [number, number];
+  zoom: number;
+  pitch: number;
+  bearing: number;
+}
 
 window.config = config;

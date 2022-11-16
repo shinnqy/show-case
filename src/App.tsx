@@ -1,18 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import { ThemeProvider, mergeStyles } from '@fluentui/react';
-import cx from 'classnames';
 import { config } from './config';
 import { MapBox } from './components/MapBox';
 import { ChapterContainer } from './entries/ChapterContainer';
 import { darkTheme } from './theme';
-import { canvasAnimation } from './canvas/animation';
-
-const alignments = {
-  left: 'lefty',
-  center: 'centered',
-  right: 'righty',
-  full: 'fully',
-};
+import { canvasAnimation, CanvasBackground } from './canvas/animation';
 
 const classNames = {
   canvas: mergeStyles({
@@ -29,6 +21,7 @@ const HEADER_CANVAS_ID = 'header-canvas';
 
 export const App = React.memo(function App() {
   useEffect(() => {
+    // new CanvasBackground(HEADER_ID, HEADER_CANVAS_ID);
     canvasAnimation(HEADER_ID, HEADER_CANVAS_ID);
   }, []);
 
@@ -52,29 +45,16 @@ export const App = React.memo(function App() {
         <div id="features">
           {config.chapters.map((c, idx) => {
             return (
-              <div
-                id={c.id}
-                key={c.id}
-                className={cx('step', {
-                  active: idx === 0,
-                  [alignments[c.alignment]]: !!c.alignment,
-                  centered: !c.alignment,
-                  hidden: c.hidden,
-                })}
+              <ThemeProvider
+                theme={darkTheme}
+                key={idx}
               >
-                <div
-                  id={`${c.id}-chapter`}
-                  className={config.theme}
-                >
-                  <h3>{c.title}</h3>
-                  {/* <img src={c?.immage} alt="" /> */}
-                  <div>
-                    <ThemeProvider theme={darkTheme}>
-                      <ChapterContainer id={c.id} />
-                    </ThemeProvider>
-                  </div>
-                </div>
-              </div>
+                <ChapterContainer
+                  id={c.id}
+                  chapter={c}
+                  index={idx}
+                />
+              </ThemeProvider>
             );
           })}
         </div>
