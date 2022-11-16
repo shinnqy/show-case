@@ -19,8 +19,10 @@ export const config = {
   use3dTerrain: false, //set true for enabling 3D maps.
   title: '全球创新地图',
   // subtitle: 'A descriptive and interesting subtitle to draw in the reader',
+  subtitle: '',
   byline: 'By WeAnalyze',
   // footer: 'Source: source citations, etc. <br> Created using <a href="https://github.com/mapbox/storytelling" target="_blank">Mapbox Storytelling</a> template.',
+  footer: '',
   chapters: [
     {
       id: COUNTRY_KEY.Chile,
