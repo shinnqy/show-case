@@ -1,14 +1,14 @@
 export enum COUNTRY_KEY {
   Chile = 'Chile',
-  TANZANIA = 'TANZANIA',
+  TANZANIA = 'Algeria',
   Finland = 'Finland',
   Australia = 'Australia',
   India = 'India',
   US = 'US',
-  CN = 'CN',
+  CN = 'China',
 }
 
-export const COUNTRIES = {
+export const COUNTRIES: Record<COUNTRY_KEY, { label: string; key: string }> = {
   [COUNTRY_KEY.Chile]: {
     label: '智利',
     key: COUNTRY_KEY.Chile,

@@ -44,11 +44,14 @@ export class MapBoxStoryTelling {
   }
 
   constructor() {
-    this.init();
+    try {
+      this.init();
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   public hightlightCountry(countryId: string[], zoomToOption: IZoomToOption) {
-    console.log({ countryId, zoomToOption });
     // this.setPitch(45, 0);
     this.doHighlightLayer(countryId);
     this.map.setPitch(0);

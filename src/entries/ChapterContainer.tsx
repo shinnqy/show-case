@@ -8,6 +8,7 @@ import { RadarChart } from './RadarChart';
 import { RankingChart } from './RankingChart';
 import { canvasAnimation, CanvasBackground } from '../canvas/animation';
 import { alignments, config, IChapter } from '../config';
+import { RaceChart } from './RaceChart';
 
 const classNames = {
   canvas: mergeStyles({
@@ -125,6 +126,7 @@ export const ChapterContainer = React.memo(function ChapterContainer(
                 }}
               >
                 <RankingChart id={props.id} />
+                {/* <RaceChart id={props.id} /> */}
               </div>
             </PivotItem>
           </Pivot>

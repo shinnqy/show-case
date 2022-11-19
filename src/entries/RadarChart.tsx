@@ -29,11 +29,11 @@ export const RadarChart = React.memo(function RadarChart(props: IOwnProps) {
           type: 'radar',
           data: [
             {
-              value: [90, 90, 90, 90, 90, 90, 90],
+              value: [80, 50, 55, 56, 56, 57, 57],
               name: 'Top 10',
             },
             {
-              value: [80, 80, 80, 80, 80, 80, 80],
+              value: [74, 37, 38, 46, 44, 58, 48],
               name: 'High income',
             },
             {
