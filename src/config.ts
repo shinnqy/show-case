@@ -17,10 +17,10 @@ export const config: IConfig = {
   inset: true,
   theme: 'dark',
   use3dTerrain: false, //set true for enabling 3D maps.
-  title: '全球创新地图',
-  // subtitle: 'A descriptive and interesting subtitle to draw in the reader',
-  subtitle: '',
-  byline: 'By WeAnalyze',
+  title: 'weanalyze全球创新地图',
+  subtitle:
+    '全球创新地图是动态捕捉全球创新发展趋势的三维实时观察基站，并实时更新和帮助用户跟踪全球的创新进展：包括全球独角兽估值动态、最新的领域论文、最新的科技类投资、最新实验室的动态等',
+  // byline: 'By WeAnalyze',
   // footer: 'Source: source citations, etc. <br> Created using <a href="https://github.com/mapbox/storytelling" target="_blank">Mapbox Storytelling</a> template.',
   footer: '',
   chapters: [
