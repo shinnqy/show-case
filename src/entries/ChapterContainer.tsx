@@ -125,8 +125,8 @@ export const ChapterContainer = React.memo(function ChapterContainer(
                   cursor: 'pointer',
                 }}
               >
-                <RankingChart id={props.id} />
-                {/* <RaceChart id={props.id} /> */}
+                {/* <RankingChart id={props.id} /> */}
+                <RaceChart id={props.id} />
               </div>
             </PivotItem>
           </Pivot>
